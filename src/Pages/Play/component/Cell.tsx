@@ -9,9 +9,12 @@ interface CellProps {
 const Cell = (props: CellProps) => {
   const { value, onClick } = props;
 
+  if (!value) {
+    return <S.Cell className="cell" onClick={onClick} />;
+  }
   return (
-    <S.Cell className="cell" onClick={onClick}>
-      {value}
+    <S.Cell className="cell" $color={value?.color}>
+      {value?.mark}
     </S.Cell>
   );
 };
