@@ -26,7 +26,13 @@ const Play = () => {
 
   const onClickCell = (x: number, y: number) => {
     const newBoard = [...board];
-    newBoard[y][x] = turn;
+    newBoard[y][x] = {
+      mark: turn,
+      color:
+        turn === settings.player1Mark
+          ? settings.player1Color
+          : settings.player2Color,
+    };
     setTurn(
       turn === settings.player1Mark
         ? settings.player2Mark

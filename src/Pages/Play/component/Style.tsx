@@ -5,12 +5,14 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-const Cell = styled.div`
+const Cell = styled.div<{ $color?: string | null }>`
   width: 75px;
   height: 75px;
   margin: 5px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-
+  color: ${({ $color }) => {
+    return $color;
+  }};
   display: flex;
   justify-content: center;
   align-items: center;
