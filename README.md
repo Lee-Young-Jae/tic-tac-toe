@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# 변형 틱택토
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+기록된 게임 보기 / 무르기 / 4X4, 5X5 등의 기능을 제공하는 변형된 틱택토 게임을 React로 구현해본다.
 
-## Available Scripts
+## 🛠️ 기술 스택
 
-In the project directory, you can run:
+TypeScript, React, Styled-Components
 
-### `npm start`
+## 🛠️ 설치 및 실행
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+# 패키지 설치
+$ npm install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# 개발 서버 실행
+$ npm start
+```
 
-### `npm test`
+## 📚 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+메인 페이지
 
-### `npm run build`
+- [ ] 게임 시작 버튼을 누르면 게임 설정 페이지로 이동한다.
+- [ ] 기록된 게임 보기 버튼을 누르면 이전 게임 기록을 보여주는 페이지로 이동한다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+게임 설정 페이지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [ ] 3X3, 4X4, 5X5 등의 다양한 사이즈의 게임판을 선택할 수 있다.
+- [ ] 플레이어는 자신의 마크의 모양(동그라미, 세모, 네모, 엑스)를 선택할 수 있다.
+- [ ] 플레이어는 자신의 마크의 색상을 선택할 수 있다.
+  - [ ] 기본 값은 플레이어1: X(파랑) / 플레이어2: O(빨강)이다.
+- [ ] 먼저 마크를 놓는 플레이어를 설정할 수 있다. (기본값 랜덤)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+게임 페이지
 
-### `npm run eject`
+- [ ] 게임을 진행하기 위한 게임 보드가 표시되어야 한다.
+- [ ] 두 플레이어에 대한 정보 (마크, 마크색, 남은 무르기 횟수)가 있어야 한다.
+- [ ] 현재 마크를 놓을 플레이어가 누구인지 알 수 있어야 한다.
+- [ ] 메인 페이지로 이동할 수 있는 버튼이 있어야 한다.
+- [ ] 종료 조건(승리, 무승부)가 충족되면 게임의 기록을 저장한다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+기록 페이지
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ ] 기록된 게임을 표시한다.
+- [ ] 게임판의 각 마크는 몇번째로 놓인 마크인지가 표시되어야 한다.
+- [ ] 메인 페이지로 이동 할 수 있는 버튼이 있어야 한다.
