@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
 import GAME_RULES from "../../utills/constance/gameSetting";
+import SettingPlayer from "./component/SettingPlayer";
 
 const Setting = () => {
   const { settings, updateSettings } = useContext(GameSettingsContext);
@@ -11,22 +12,6 @@ const Setting = () => {
 
   const onChangeWinCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateSettings({ ...settings, winCondition: parseInt(e.target.value) });
-  };
-
-  const onChangePlayer1Mark = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateSettings({ ...settings, player1Mark: e.target.value as "X" | "O" });
-  };
-
-  const onChangePlayer1Color = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateSettings({ ...settings, player1Color: e.target.value });
-  };
-
-  const onChangePlayer2Mark = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateSettings({ ...settings, player2Mark: e.target.value as "X" | "O" });
-  };
-
-  const onChangePlayer2Color = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateSettings({ ...settings, player2Color: e.target.value });
   };
 
   const onChangeStartingPlayer = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,48 +48,9 @@ const Setting = () => {
           />
         </label>
       </div>
-      <div>
-        <label>
-          Player 1 Mark
-          <select value={settings.player1Mark} onChange={onChangePlayer1Mark}>
-            <option value="X">X</option>
-            <option value="O">O</option>
-            <option value="■">■</option>
-            <option value="▲">▲</option>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          Player 1 Color
-          <input
-            type="color"
-            value={settings.player1Color}
-            onChange={onChangePlayer1Color}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Player 2 Mark
-          <select value={settings.player2Mark} onChange={onChangePlayer2Mark}>
-            <option value="X">X</option>
-            <option value="O">O</option>
-            <option value="■">■</option>
-            <option value="▲">▲</option>
-          </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          Player 2 Color
-          <input
-            type="color"
-            value={settings.player2Color}
-            onChange={onChangePlayer2Color}
-          />
-        </label>
-      </div>
+      <SettingPlayer currentPlayer="player1"></SettingPlayer>
+      <SettingPlayer currentPlayer="player2"></SettingPlayer>
+
       <div>
         <label>
           Starting Player
