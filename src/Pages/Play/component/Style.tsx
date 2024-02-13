@@ -10,6 +10,7 @@ const Cell = styled.div<{ $color?: string | null }>`
   height: 75px;
   margin: 5px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   color: ${({ $color }) => {
     return $color;
   }};
@@ -17,6 +18,7 @@ const Cell = styled.div<{ $color?: string | null }>`
   justify-content: center;
   align-items: center;
   font-size: 2rem;
+
   cursor: pointer;
   &:hover {
     background-color: #f2f2f2;
