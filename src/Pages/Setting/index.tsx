@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
+import GAME_RULES from "../../utills/constance/gameSetting";
 
 const Setting = () => {
   const { settings, updateSettings } = useContext(GameSettingsContext);
@@ -43,8 +44,8 @@ const Setting = () => {
           Board Size
           <input
             type="number"
-            max="5"
-            min="3"
+            max={GAME_RULES.MAX_BOARD_SIZE}
+            min={GAME_RULES.MIN_BOARD_SIZE}
             value={settings.boardSize}
             onChange={onChangeBoardSize}
           />
@@ -55,8 +56,8 @@ const Setting = () => {
           Win Condition
           <input
             type="number"
-            max="5"
-            min="3"
+            max={GAME_RULES.MAX_WIN_CONDITION}
+            min={GAME_RULES.MIN_WIN_CONDITION}
             value={settings.winCondition}
             onChange={onChangeWinCondition}
           />
