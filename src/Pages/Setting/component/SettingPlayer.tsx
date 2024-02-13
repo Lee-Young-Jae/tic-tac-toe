@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GameSettingsContext } from "../../../context/GameSettingsContext";
 import { PlayerMark } from "../../../types/game";
+import { PLAYER } from "../../../utills/constance/gameSetting";
 
 interface SettingPlayerProps {
   currentPlayer: "player1" | "player2";
@@ -31,8 +32,11 @@ const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
           value={settings[`${currentPlayer}Mark`]}
           onChange={onChangePlayerMark}
         >
-          <option value="X">X</option>
-          <option value="O">O</option>
+          {PLAYER.MARK.map((mark) => (
+            <option key={mark} value={mark}>
+              {mark}
+            </option>
+          ))}
         </select>
       </label>
       <label>

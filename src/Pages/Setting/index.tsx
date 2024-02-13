@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
-import GAME_RULES from "../../utills/constance/gameSetting";
+import { GAME_RULES } from "../../utills/constance/gameSetting";
 import SettingPlayer from "./component/SettingPlayer";
 
+import { useNavigate } from "react-router-dom";
+
 const Setting = () => {
+  const navigate = useNavigate();
   const { settings, updateSettings } = useContext(GameSettingsContext);
 
   const onChangeBoardSize = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +22,10 @@ const Setting = () => {
       ...settings,
       startingPlayer: e.target.value as "player1" | "player2" | "random",
     });
+  };
+
+  const onClickGameStart = () => {
+    navigate("/play");
   };
 
   return (
@@ -64,6 +71,8 @@ const Setting = () => {
           </select>
         </label>
       </div>
+
+      <button onClick={onClickGameStart}>GameStart!</button>
     </div>
   );
 };

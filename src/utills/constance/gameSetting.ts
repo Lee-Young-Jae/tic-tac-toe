@@ -5,4 +5,8 @@ const GAME_RULES = {
   MAX_WIN_CONDITION: 5,
 };
 
-export default GAME_RULES;
+const PLAYER = {
+  MARK: ["O", "X", "■", "▲"],
+};
+
+export { GAME_RULES, PLAYER };
