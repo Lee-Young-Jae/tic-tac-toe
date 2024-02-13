@@ -5,18 +5,22 @@ import Play from "./Pages/Play";
 import History from "./Pages/History";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { GameSettingsProvider } from "./context/GameSettingsContext";
+
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/setting" element={<Setting />} />
-          <Route path="/play" element={<Play />} />
-          <Route path="history" element={<History />}></Route>
-        </Routes>
-      </Router>
-    </div>
+    <GameSettingsProvider>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/setting" element={<Setting />} />
+            <Route path="/play" element={<Play />} />
+            <Route path="history" element={<History />}></Route>
+          </Routes>
+        </Router>
+      </div>
+    </GameSettingsProvider>
   );
 }
 
