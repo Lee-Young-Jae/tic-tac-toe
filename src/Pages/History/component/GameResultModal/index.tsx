@@ -1,5 +1,5 @@
 import Modal from "../../../../Components/Modal";
-import GameResult from "../GameResult";
+import GameResult from "../GameResultDetail";
 import { GameResult as GameResultType } from "../../../../types/game";
 import S from "./Style";
 
