@@ -3,9 +3,12 @@ import { GameSettingsContext } from "../../context/GameSettingsContext";
 import { GameState } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
+import { checkWin } from "../../utills/gameControl/gameControl";
+
+import { useNavigate } from "react-router-dom";
 
 const Play = () => {
-  const { settings, updateSettings } = useContext(GameSettingsContext);
+  const { settings } = useContext(GameSettingsContext);
 
   const [board, setBoard] = useState<GameState["board"]>(
     Array.from({ length: settings.boardSize }, () =>
@@ -33,6 +36,8 @@ const Play = () => {
           ? settings.player1Color
           : settings.player2Color,
     };
+    checkWin(newBoard, turn, settings.winCondition);
+
     setTurn(
       turn === settings.player1Mark
         ? settings.player2Mark
@@ -41,10 +46,16 @@ const Play = () => {
     setBoard(newBoard);
   };
 
+  const navigate = useNavigate();
+
+  const onClickMain = () => {
+    navigate("/");
+  };
+
   return (
     <S.Container>
-      <h1>Play</h1>
       <Board board={board} onClick={onClickCell}></Board>
+      <S.MainButton onClick={onClickMain}>Main</S.MainButton>
     </S.Container>
   );
 };
