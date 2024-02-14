@@ -23,7 +23,7 @@ const Label = styled.label`
   flex-direction: column;
   margin-bottom: 10px;
   text-transform: capitalize;
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
 `;
@@ -39,7 +39,7 @@ const BoardSizeButton = styled.button`
   border-radius: 5px;
   outline: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 1rem;
   padding: 10px;
   margin-bottom: 10px;
 
@@ -60,24 +60,7 @@ const SettingWinCondition = styled.div`
   margin-bottom: 20px;
 `;
 
-const WinConditionButton = styled.button`
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 10px;
-  margin-bottom: 10px;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-
-  &.active {
-    background-color: #000;
-    color: #fff;
-  }
-`;
+const WinConditionButton = styled(BoardSizeButton)``;
 
 const GameStartButton = styled.button`
   border: none;
@@ -106,7 +89,6 @@ const Players = styled.div`
   margin: 0 auto;
 
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
