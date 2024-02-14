@@ -177,7 +177,7 @@ const Play = () => {
     const gameResults = JSON.parse(localStorage.getItem("gameResults") || "[]");
     localStorage.setItem(
       "gameResults",
-      JSON.stringify([...gameResults, gameResult])
+      JSON.stringify([gameResult, ...gameResults])
     );
   }, [
     gameStatus,
