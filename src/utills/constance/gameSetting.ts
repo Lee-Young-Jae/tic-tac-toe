@@ -7,6 +7,10 @@ const GAME_RULES = {
 
 const PLAYER = {
   MARK: ["O", "X", "■", "▲"],
+  COLOR: {
+    BLUE: "#76b3ff",
+    RED: "#ff7676",
+  },
 };
 
 export { GAME_RULES, PLAYER };

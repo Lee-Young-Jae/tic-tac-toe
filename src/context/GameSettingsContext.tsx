@@ -1,13 +1,14 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
 import { GameSettings, GameSettingsContextType } from "../types/game";
+import { PLAYER } from "../utills/constance/gameSetting";
 
 const defaultSettings: GameSettings = {
   boardSize: 3,
   winCondition: 3,
   player1Mark: "X",
-  player1Color: "#0000FF",
+  player1Color: PLAYER.COLOR.BLUE,
   player2Mark: "O",
-  player2Color: "#FF0000",
+  player2Color: PLAYER.COLOR.RED,
   startingPlayer: "random",
 };
 
