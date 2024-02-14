@@ -3,7 +3,11 @@ import { GameSettingsContext } from "../../context/GameSettingsContext";
 import { GameResult, GameState, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
-import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
+import {
+  checkDraw,
+  checkWin,
+  generateInitialBoard,
+} from "../../utills/gameControl/gameControl";
 
 import { useNavigate } from "react-router-dom";
 import PlayerStatus from "./component/PlayerStatus";
@@ -15,9 +19,7 @@ const Play = () => {
   const { settings } = useContext(GameSettingsContext);
 
   const [board, setBoard] = useState<GameState["board"]>(
-    Array.from({ length: settings.boardSize }, () =>
-      Array(settings.boardSize).fill(null)
-    )
+    generateInitialBoard(settings.boardSize)
   );
   const [gameStatus, setGameStatus] =
     useState<GameState["gameStatus"]>("inProgress");
@@ -75,11 +77,7 @@ const Play = () => {
   };
 
   const onGameRestart = () => {
-    setBoard(
-      Array.from({ length: settings.boardSize }, () =>
-        Array(settings.boardSize).fill(null)
-      )
-    );
+    setBoard(generateInitialBoard(settings.boardSize));
     setGameStatus("inProgress");
     setRecords([]);
     setUndoCount({
@@ -182,18 +180,7 @@ const Play = () => {
       "gameResults",
       JSON.stringify([gameResult, ...gameResults])
     );
-  }, [
-    gameStatus,
-    records,
-    board,
-
-    settings.player1Color,
-    settings.player1Mark,
-    settings.player2Color,
-    settings.player2Mark,
-    settings.winCondition,
-    undoCount,
-  ]);
+  }, [gameStatus, records, board, settings, undoCount]);
 
   useEffect(() => {
     if (gameStatus === "inProgress") return;
