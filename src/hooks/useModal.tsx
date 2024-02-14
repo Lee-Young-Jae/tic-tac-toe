@@ -23,9 +23,14 @@ export const useModal = () => {
 export const ModalContainer = () => {
   const { modal, closeModal } = useModal();
 
+  const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget) return;
+    closeModal();
+  };
+
   return modal
     ? createPortal(
-        <Backdrop onClick={closeModal}>{modal}</Backdrop>,
+        <Backdrop onClick={onBackdropClick}>{modal}</Backdrop>,
         document.getElementById("modal-root") as Element
       )
     : null;
