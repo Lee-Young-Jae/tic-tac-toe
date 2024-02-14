@@ -40,7 +40,28 @@ const Play = () => {
 
   const { openModal, closeModal } = useModal();
 
-  const onGameStart = () => {
+  const openGameResultModal = (
+    header: React.ReactNode,
+    content: React.ReactNode
+  ) => {
+    openModal(
+      <Modal
+        header={header}
+        footer={
+          <>
+            <S.ModalButton onClick={() => closeModal()}>
+              다시 시작하기
+            </S.ModalButton>
+            <S.ModalButton>게임 결과 기록하기</S.ModalButton>
+          </>
+        }
+      >
+        {content}
+      </Modal>
+    );
+  };
+
+  const onGameRestart = () => {
     setBoard(
       Array.from({ length: settings.boardSize }, () =>
         Array(settings.boardSize).fill(null)
@@ -76,28 +97,12 @@ const Play = () => {
     if (checkWin(newBoard, turn, settings.winCondition)) {
       const winner = turn === settings.player1Mark ? "player1" : "player2";
       setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
-      openModal(
-        <Modal
-          header={<p>🙌 축하합니다!</p>}
-          footer={
-            <>
-              <S.ModalButton
-                onClick={() => {
-                  closeModal();
-                  onGameStart();
-                }}
-              >
-                다시 시작하기
-              </S.ModalButton>
-              <S.ModalButton>게임 결과 기록하기</S.ModalButton>
-            </>
-          }
-        >
-          <p>
-            {`${winner}님의 승리! ${settings.winCondition}개의 ${turn}을
-            연결하셨습니다.`}
-          </p>
-        </Modal>
+      openGameResultModal(
+        <p>🙌 축하합니다!</p>,
+        <p>
+          {`${winner}님의 승리! ${settings.winCondition}개의 ${turn}을
+          연결하셨습니다.`}
+        </p>
       );
       setBoard(newBoard);
       return;
@@ -105,25 +110,9 @@ const Play = () => {
 
     if (checkDraw(newBoard)) {
       setGameStatus("draw");
-      openModal(
-        <Modal
-          header={<p>무승부!</p>}
-          footer={
-            <>
-              <S.ModalButton
-                onClick={() => {
-                  closeModal();
-                  onGameStart();
-                }}
-              >
-                다시 시작하기
-              </S.ModalButton>
-              <S.ModalButton>게임 결과 기록하기</S.ModalButton>
-            </>
-          }
-        >
-          <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
-        </Modal>
+      openGameResultModal(
+        <p>무승부!</p>,
+        <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
       );
       setBoard(newBoard);
       return;
@@ -185,7 +174,7 @@ const Play = () => {
       <Board board={board} onClick={onClickCell} />
       <S.MainButton onClick={onClickMain}>Main</S.MainButton>
       {gameStatus !== "inProgress" && (
-        <S.RestartButton onClick={onGameStart}>Restart</S.RestartButton>
+        <S.RestartButton onClick={onGameRestart}>Restart</S.RestartButton>
       )}
     </S.Container>
   );
