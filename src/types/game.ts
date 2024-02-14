@@ -14,7 +14,11 @@ export type GameSettingsContextType = {
   updateSettings: (newSettings: GameSettings) => void;
 };
 
-type Cell = { mark: PlayerMark | null; color: string | null } | null;
+type Cell = {
+  mark: PlayerMark | null;
+  color: string | null;
+  sequence?: number;
+} | null;
 type Board = Cell[][];
 type GameStatus = "inProgress" | "player1Won" | "player2Won" | "draw";
 type record = {

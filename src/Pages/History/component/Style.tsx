@@ -5,7 +5,7 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-const Cell = styled.div<{ $color?: string | null }>`
+const Cell = styled.div<{ $color?: string | null; $displayStep?: Boolean }>`
   width: 40px;
   height: 40px;
   margin: 5px;
@@ -18,8 +18,18 @@ const Cell = styled.div<{ $color?: string | null }>`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+  position: relative;
 
   cursor: pointer;
+
+  & span {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    font-size: 0.7rem;
+    color: #666;
+  }
+
   &:hover {
     background-color: #f2f2f2;
   }
