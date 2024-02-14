@@ -11,6 +11,10 @@ const Container = styled.div`
   padding: 10px;
 
   box-shadow: 0 0 5px 0 #00000060;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const Label = styled.label`
@@ -99,8 +103,9 @@ const SettingPlayer = styled.div`
 `;
 
 const Players = styled.div`
-  width: 500px;
   margin: 0 auto;
+
+  width: 100%;
 
   display: flex;
   justify-content: space-between;
