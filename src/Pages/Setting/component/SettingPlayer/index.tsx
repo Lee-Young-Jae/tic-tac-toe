@@ -3,7 +3,7 @@ import { GameSettingsContext } from "../../../../context/GameSettingsContext";
 import { PlayerMark } from "../../../../types/game";
 import { PLAYER } from "../../../../utills/constance/gameSetting";
 
-import { Container, Label, Select, Input, PlayerName } from "./Style";
+import S from "./Style";
 
 interface SettingPlayerProps {
   currentPlayer: "player1" | "player2";
@@ -55,22 +55,22 @@ const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
   };
 
   return (
-    <Container>
-      <PlayerName>{currentPlayer}</PlayerName>
-      <Label>
+    <S.Container>
+      <S.PlayerName>{currentPlayer}</S.PlayerName>
+      <S.Label>
         마크
-        <Select
+        <S.Select
           value={settings[`${currentPlayer}Mark`]}
           onChange={onChangePlayerMark}
         >
           {PLAYER.MARK.map((mark) => (
-            <option key={mark} value={mark}>
+            <S.Option key={mark} value={mark}>
               {mark}
-            </option>
+            </S.Option>
           ))}
-        </Select>
-      </Label>
-      <Label>
+        </S.Select>
+      </S.Label>
+      <S.Label>
         색상
         <datalist id="color_list">
           <option value="#ff7676"></option>
@@ -78,14 +78,14 @@ const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
           <option value="#760000"></option>
           <option value="#007676"></option>
         </datalist>
-        <Input
+        <S.Input
           type="color"
           list="color_list"
           value={settings[`${currentPlayer}Color`]}
           onChange={onChangePlayerColor}
         />
-      </Label>
-    </Container>
+      </S.Label>
+    </S.Container>
   );
 };
 
