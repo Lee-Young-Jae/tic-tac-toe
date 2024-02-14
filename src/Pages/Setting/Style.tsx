@@ -13,7 +13,7 @@ const Container = styled.div`
   box-shadow: 0 0 5px 0 #00000060;
 
   @media (max-width: 500px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 
