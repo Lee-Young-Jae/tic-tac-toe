@@ -8,6 +8,11 @@ const Container = styled.div`
   height: 100dvh;
 `;
 
+const PlayerStatusSection = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+`;
+
 const MainButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
@@ -23,6 +28,6 @@ const MainButton = styled.button`
   }
 `;
 
-const S = { Container, MainButton };
+const S = { Container, PlayerStatusSection, MainButton };
 
 export default S;

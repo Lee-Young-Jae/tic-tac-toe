@@ -47,6 +47,29 @@ const PlayerMark = styled.p<{ $color?: string | null }>`
   }};
 `;
 
-const S = { Row, Cell, PlayerStatus, PlayerMark };
+const UndoButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #000;
+  color: #fff;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #333;
+  }
+
+  &:disabled {
+    background-color: #f0f0f0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+  }
+`;
+
+const S = { Row, Cell, PlayerStatus, PlayerMark, UndoButton };
 
 export default S;
