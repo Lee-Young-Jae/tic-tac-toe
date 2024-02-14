@@ -107,6 +107,13 @@ const Play = () => {
     };
     setRecords([...records, { postion: { x, y }, player: turn }]);
 
+    setTurn(
+      turn === settings.player1Mark
+        ? settings.player2Mark
+        : settings.player1Mark
+    );
+    setBoard(newBoard);
+
     if (checkWin(newBoard, turn, settings.winCondition)) {
       const winner = turn === settings.player1Mark ? "player1" : "player2";
       setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
@@ -117,6 +124,7 @@ const Play = () => {
           연결하셨습니다.`}
         </p>
       );
+      return;
     }
 
     if (checkDraw(newBoard)) {
@@ -125,13 +133,8 @@ const Play = () => {
         <p>무승부!</p>,
         <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
       );
+      return;
     }
-    setTurn(
-      turn === settings.player1Mark
-        ? settings.player2Mark
-        : settings.player1Mark
-    );
-    setBoard(newBoard);
   };
 
   const onUndo = (playerMark: PlayerMark) => {
