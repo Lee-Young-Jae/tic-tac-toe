@@ -3,6 +3,7 @@ const GAME_RULES = {
   MAX_BOARD_SIZE: 5,
   MIN_WIN_CONDITION: 3,
   MAX_WIN_CONDITION: 5,
+  UNDO_COUNT: 3,
 };
 
 const PLAYER = {

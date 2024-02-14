@@ -80,3 +80,9 @@ export const checkWin = (
 export const checkDraw = (board: GameState["board"]) => {
   return board.every((row) => row.every((cell) => cell));
 };
+
+export const generateInitialBoard = (size: number) => {
+  return Array.from({ length: size }, () =>
+    Array.from({ length: size }, () => null)
+  );
+};

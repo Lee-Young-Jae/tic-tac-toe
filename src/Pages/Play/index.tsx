@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
-import { GameResult, GameState, PlayerMark } from "../../types/game";
+import { GameResult, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
 import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
@@ -9,35 +9,28 @@ import { useNavigate } from "react-router-dom";
 import PlayerStatus from "./component/PlayerStatus";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../../Components/Modal";
+import { useGame } from "../../hooks/useGame";
 
 const Play = () => {
   const navigate = useNavigate();
   const { settings } = useContext(GameSettingsContext);
 
-  const [board, setBoard] = useState<GameState["board"]>(
-    Array.from({ length: settings.boardSize }, () =>
-      Array(settings.boardSize).fill(null)
-    )
-  );
-  const [gameStatus, setGameStatus] =
-    useState<GameState["gameStatus"]>("inProgress");
-
-  const [records, setRecords] = useState<GameState["records"]>([]);
-  const [undoCount, setUndoCount] = useState({
-    [settings.player1Mark]: 3,
-    [settings.player2Mark]: 3,
-  });
-
-  const generateRandomPlayer = () =>
-    Math.random() > 0.5 ? settings.player1Mark : settings.player2Mark;
-
-  const [turn, setTurn] = useState<GameState["currentPlayer"]>(
-    settings.startingPlayer === "random"
-      ? generateRandomPlayer()
-      : settings.startingPlayer === "player1"
-      ? settings.player1Mark
-      : settings.player2Mark
-  );
+  const {
+    board,
+    gameStatus,
+    initializeGameState,
+    records,
+    setBoard,
+    setGameStatus,
+    setRecords,
+    setTurn,
+    setUndoCount,
+    turn,
+    undoCount,
+  } = useGame(settings);
+  useEffect(() => {
+    initializeGameState();
+  }, [initializeGameState]);
 
   const { openModal, closeModal } = useModal();
 
@@ -52,7 +45,7 @@ const Play = () => {
           <>
             <S.ModalButton
               onClick={() => {
-                onGameRestart();
+                initializeGameState();
                 closeModal();
               }}
             >
@@ -73,28 +66,6 @@ const Play = () => {
       </Modal>
     );
   };
-
-  const onGameRestart = () => {
-    setBoard(
-      Array.from({ length: settings.boardSize }, () =>
-        Array(settings.boardSize).fill(null)
-      )
-    );
-    setGameStatus("inProgress");
-    setRecords([]);
-    setUndoCount({
-      [settings.player1Mark]: 3,
-      [settings.player2Mark]: 3,
-    });
-    setTurn(
-      settings.startingPlayer === "random"
-        ? generateRandomPlayer()
-        : settings.startingPlayer === "player1"
-        ? settings.player1Mark
-        : settings.player2Mark
-    );
-  };
-
   const onClickCell = (x: number, y: number) => {
     if (gameStatus !== "inProgress") return;
     const newBoard = [...board];
@@ -182,18 +153,7 @@ const Play = () => {
       "gameResults",
       JSON.stringify([gameResult, ...gameResults])
     );
-  }, [
-    gameStatus,
-    records,
-    board,
-
-    settings.player1Color,
-    settings.player1Mark,
-    settings.player2Color,
-    settings.player2Mark,
-    settings.winCondition,
-    undoCount,
-  ]);
+  }, [gameStatus, records, board, settings, undoCount]);
 
   useEffect(() => {
     if (gameStatus === "inProgress") return;
@@ -225,7 +185,7 @@ const Play = () => {
       <Board board={board} onClick={onClickCell} />
       <S.MainButton onClick={onClickMain}>Main</S.MainButton>
       {gameStatus !== "inProgress" && (
-        <S.RestartButton onClick={onGameRestart}>Restart</S.RestartButton>
+        <S.RestartButton onClick={initializeGameState}>Restart</S.RestartButton>
       )}
     </S.Container>
   );

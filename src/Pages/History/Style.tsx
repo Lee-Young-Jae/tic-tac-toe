@@ -4,7 +4,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-
   width: 500px;
   height: 100dvh;
   border-radius: 5px;
@@ -13,7 +12,7 @@ const Container = styled.div`
   box-shadow: 0 0 5px 0 #00000060;
 
   @media (max-width: 500px) {
-    width: 100%;
+    width: 90%;
   }
 `;
 

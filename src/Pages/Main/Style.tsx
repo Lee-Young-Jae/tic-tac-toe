@@ -6,7 +6,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100dvh;
-
   user-select: none;
 `;
 
