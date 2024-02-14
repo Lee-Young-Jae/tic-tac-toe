@@ -3,7 +3,7 @@ import { GameSettingsContext } from "../../context/GameSettingsContext";
 import { GameState, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
-import { checkWin } from "../../utills/gameControl/gameControl";
+import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
 
 import { useNavigate } from "react-router-dom";
 import PlayerStatus from "./component/PlayerStatus";
@@ -40,7 +40,7 @@ const Play = () => {
 
   const { openModal, closeModal } = useModal();
 
-  const onGameRestart = () => {
+  const onGameStart = () => {
     setBoard(
       Array.from({ length: settings.boardSize }, () =>
         Array(settings.boardSize).fill(null)
@@ -78,13 +78,13 @@ const Play = () => {
       setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
       openModal(
         <Modal
-          header={<p>🎉축하합니다!</p>}
+          header={<p>🙌 축하합니다!</p>}
           footer={
             <>
               <S.ModalButton
                 onClick={() => {
                   closeModal();
-                  onGameRestart();
+                  onGameStart();
                 }}
               >
                 다시 시작하기
@@ -97,6 +97,32 @@ const Play = () => {
             {`${winner}님의 승리! ${settings.winCondition}개의 ${turn}을
             연결하셨습니다.`}
           </p>
+        </Modal>
+      );
+      setBoard(newBoard);
+      return;
+    }
+
+    if (checkDraw(newBoard)) {
+      setGameStatus("draw");
+      openModal(
+        <Modal
+          header={<p>무승부!</p>}
+          footer={
+            <>
+              <S.ModalButton
+                onClick={() => {
+                  closeModal();
+                  onGameStart();
+                }}
+              >
+                다시 시작하기
+              </S.ModalButton>
+              <S.ModalButton>게임 결과 기록하기</S.ModalButton>
+            </>
+          }
+        >
+          <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
         </Modal>
       );
       setBoard(newBoard);
@@ -159,7 +185,7 @@ const Play = () => {
       <Board board={board} onClick={onClickCell} />
       <S.MainButton onClick={onClickMain}>Main</S.MainButton>
       {gameStatus !== "inProgress" && (
-        <S.RestartButton onClick={onGameRestart}>Restart</S.RestartButton>
+        <S.RestartButton onClick={onGameStart}>Restart</S.RestartButton>
       )}
     </S.Container>
   );
