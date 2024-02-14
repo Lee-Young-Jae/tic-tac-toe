@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
-import { GameState, PlayerMark } from "../../types/game";
+import { GameResult, GameState, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
 import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
@@ -107,6 +107,13 @@ const Play = () => {
     };
     setRecords([...records, { postion: { x, y }, player: turn }]);
 
+    setTurn(
+      turn === settings.player1Mark
+        ? settings.player2Mark
+        : settings.player1Mark
+    );
+    setBoard(newBoard);
+
     if (checkWin(newBoard, turn, settings.winCondition)) {
       const winner = turn === settings.player1Mark ? "player1" : "player2";
       setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
@@ -117,6 +124,7 @@ const Play = () => {
           연결하셨습니다.`}
         </p>
       );
+      return;
     }
 
     if (checkDraw(newBoard)) {
@@ -125,13 +133,8 @@ const Play = () => {
         <p>무승부!</p>,
         <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
       );
+      return;
     }
-    setTurn(
-      turn === settings.player1Mark
-        ? settings.player2Mark
-        : settings.player1Mark
-    );
-    setBoard(newBoard);
   };
 
   const onUndo = (playerMark: PlayerMark) => {
@@ -157,35 +160,39 @@ const Play = () => {
   };
 
   const addGameResultLocalStorage = useCallback(() => {
-    const gameResult = {
+    const gameResult: GameResult = {
       date: new Date().toISOString(),
       status: gameStatus,
       winCondition: settings.winCondition,
-      boardSize: settings.boardSize,
+      board: board,
       player1: {
         mark: settings.player1Mark,
         color: settings.player1Color,
+        undoCount: undoCount[settings.player1Mark],
       },
       player2: {
         mark: settings.player2Mark,
         color: settings.player2Color,
+        undoCount: undoCount[settings.player2Mark],
       },
       records,
     };
     const gameResults = JSON.parse(localStorage.getItem("gameResults") || "[]");
     localStorage.setItem(
       "gameResults",
-      JSON.stringify([...gameResults, gameResult])
+      JSON.stringify([gameResult, ...gameResults])
     );
   }, [
     gameStatus,
     records,
-    settings.boardSize,
+    board,
+
     settings.player1Color,
     settings.player1Mark,
     settings.player2Color,
     settings.player2Mark,
     settings.winCondition,
+    undoCount,
   ]);
 
   useEffect(() => {
