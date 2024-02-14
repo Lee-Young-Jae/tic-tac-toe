@@ -44,3 +44,29 @@ $ npm start
 - [x] 기록된 게임을 표시한다.
 - [x] 게임판의 각 마크는 몇번째로 놓인 마크인지가 표시되어야 한다.
 - [x] 메인 페이지로 이동 할 수 있는 버튼이 있어야 한다.
+
+## 👨‍💻 미리보기
+
+##### # 기록된 게임 보기 버튼을 누르면 이전 게임 기록을 보여주는 페이지로 이동한다.
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/d8ec35d7-a3f5-49c3-a4e6-491286abaaed" width="90%">
+
+##### # 게임 시작 버튼을 누르면 게임 설정 페이지로 이동한다.
+##### 승리조건은 게임판의 크기를 넘을 수 없다.
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/5bc45bea-d31b-48ac-8403-4ad8dc71bf00" width="90%">
+
+##### 플레이어의 마크/색상이 겹치거나 배경색에 가까운 색상을 선택할 수 없다.
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/4321f6bf-7506-4e07-b194-5a0ed3ed09d9" width="90%">
+
+##### # 게임을 진행할 페이지로 이동한다.
+##### 가로 승리 / 무르기
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/563ed3da-507c-4aa7-987e-0ff4afa0a927" width="90%">
+
+##### 대각선 승리
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/3dbdc9ab-51ad-4b86-ae4f-06af051eba75" width="90%">
+
+##### 무승부
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/96fdd287-4c85-4beb-b9f5-ef2d03482b58" width="90%">
+
+##### # 이전 게임 기록을 보여주는 페이지로 이동한다.
+##### 게임판의 각 마크는 몇번째로 놓인 마크인지가 표시되어야 한다.
+<img src="https://github.com/Lee-Young-Jae/tic-tac-toe/assets/78532129/e5185119-d44b-4fbc-aada-beaa757e8653" width="90%">
