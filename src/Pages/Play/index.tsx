@@ -161,7 +161,7 @@ const Play = () => {
       date: new Date().toISOString(),
       status: gameStatus,
       winCondition: settings.winCondition,
-      boardSize: settings.boardSize,
+      board: board,
       player1: {
         mark: settings.player1Mark,
         color: settings.player1Color,
@@ -182,7 +182,8 @@ const Play = () => {
   }, [
     gameStatus,
     records,
-    settings.boardSize,
+    board,
+
     settings.player1Color,
     settings.player1Mark,
     settings.player2Color,

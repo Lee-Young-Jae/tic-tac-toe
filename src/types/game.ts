@@ -41,7 +41,7 @@ export type GameResult = {
   date: string;
   status: gameStatus;
   winCondition: number;
-  boardSize: number;
+  board: Board;
   player1: Player;
   player2: Player;
   records: recordList;
