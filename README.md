@@ -2,6 +2,8 @@
 
 기록된 게임 보기 / 무르기 / 4X4, 5X5 등의 기능을 제공하는 변형된 틱택토 게임을 React로 구현해본다.
 
+[🤖Demo](https://tic-tac-toe-eta-two-12.vercel.app/)
+
 ## 🛠️ 기술 스택
 
 TypeScript, React, Styled-Components
