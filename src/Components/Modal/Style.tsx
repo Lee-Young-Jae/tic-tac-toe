@@ -26,6 +26,10 @@ const Main = styled.div`
 
 const Footer = styled.div`
   padding-top: 10px;
+
+  & > * {
+    margin-right: 10px;
+  }
 `;
 
 const S = { Container, Header, Main, Footer };

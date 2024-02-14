@@ -28,6 +28,21 @@ const MainButton = styled.button`
   }
 `;
 
-const S = { Container, PlayerStatusSection, MainButton };
+const RestartButton = styled(MainButton)``;
+
+const ModalButton = styled(MainButton)`
+  margin-top: 0;
+  margin-right: 10px;
+  font-size: 16px;
+  padding: 5px 10px;
+`;
+
+const S = {
+  Container,
+  PlayerStatusSection,
+  MainButton,
+  RestartButton,
+  ModalButton,
+};
 
 export default S;
