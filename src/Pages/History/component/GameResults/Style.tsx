@@ -5,16 +5,15 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-
-  max-height: 700px;
-  overflow-y: auto;
+  margin-top: 1rem;
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
+    max-height: 500px;
+    overflow-y: scroll;
   }
 `;
 
