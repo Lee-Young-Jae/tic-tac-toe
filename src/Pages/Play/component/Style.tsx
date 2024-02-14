@@ -25,6 +25,28 @@ const Cell = styled.div<{ $color?: string | null }>`
   }
 `;
 
-const S = { Row, Cell };
+const PlayerStatus = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  border-radius: 5px;
+
+  &.active {
+    border: 2px solid #000000;
+  }
+`;
+
+const PlayerMark = styled.p<{ $color?: string | null }>`
+  font-size: 2rem;
+  color: ${({ $color }) => {
+    return $color;
+  }};
+`;
+
+const S = { Row, Cell, PlayerStatus, PlayerMark };
 
 export default S;

@@ -6,6 +6,7 @@ import S from "./Style";
 import { checkWin } from "../../utills/gameControl/gameControl";
 
 import { useNavigate } from "react-router-dom";
+import PlayerStatus from "./component/PlayerStatus";
 
 const Play = () => {
   const { settings } = useContext(GameSettingsContext);
@@ -54,6 +55,22 @@ const Play = () => {
 
   return (
     <S.Container>
+      <PlayerStatus
+        className={turn === settings.player1Mark ? "active" : ""}
+        player={{
+          mark: settings.player1Mark,
+          color: settings.player1Color,
+          undoCount: 3,
+        }}
+      ></PlayerStatus>
+      <PlayerStatus
+        className={turn === settings.player2Mark ? "active" : ""}
+        player={{
+          mark: settings.player2Mark,
+          color: settings.player2Color,
+          undoCount: 3,
+        }}
+      ></PlayerStatus>
       <Board board={board} onClick={onClickCell}></Board>
       <S.MainButton onClick={onClickMain}>Main</S.MainButton>
     </S.Container>
