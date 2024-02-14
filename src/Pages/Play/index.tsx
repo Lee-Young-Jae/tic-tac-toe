@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
 import { GameState, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
@@ -11,6 +11,7 @@ import { useModal } from "../../hooks/useModal";
 import Modal from "../../Components/Modal";
 
 const Play = () => {
+  const navigate = useNavigate();
   const { settings } = useContext(GameSettingsContext);
 
   const [board, setBoard] = useState<GameState["board"]>(
@@ -49,10 +50,22 @@ const Play = () => {
         header={header}
         footer={
           <>
-            <S.ModalButton onClick={() => closeModal()}>
+            <S.ModalButton
+              onClick={() => {
+                onGameRestart();
+                closeModal();
+              }}
+            >
               다시 시작하기
             </S.ModalButton>
-            <S.ModalButton>게임 결과 기록하기</S.ModalButton>
+            <S.ModalButton
+              onClick={() => {
+                closeModal();
+                navigate("/history");
+              }}
+            >
+              게임 결과 확인하기
+            </S.ModalButton>
           </>
         }
       >
@@ -92,8 +105,8 @@ const Play = () => {
           ? settings.player1Color
           : settings.player2Color,
     };
-
     setRecords([...records, { postion: { x, y }, player: turn }]);
+
     if (checkWin(newBoard, turn, settings.winCondition)) {
       const winner = turn === settings.player1Mark ? "player1" : "player2";
       setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
@@ -104,8 +117,6 @@ const Play = () => {
           연결하셨습니다.`}
         </p>
       );
-      setBoard(newBoard);
-      return;
     }
 
     if (checkDraw(newBoard)) {
@@ -114,10 +125,7 @@ const Play = () => {
         <p>무승부!</p>,
         <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>
       );
-      setBoard(newBoard);
-      return;
     }
-
     setTurn(
       turn === settings.player1Mark
         ? settings.player2Mark
@@ -144,10 +152,46 @@ const Play = () => {
     setUndoCount({ ...undoCount, [playerMark]: undoCount[playerMark] - 1 });
   };
 
-  const navigate = useNavigate();
   const onClickMain = () => {
     navigate("/");
   };
+
+  const addGameResultLocalStorage = useCallback(() => {
+    const gameResult = {
+      date: new Date().toISOString(),
+      status: gameStatus,
+      winCondition: settings.winCondition,
+      boardSize: settings.boardSize,
+      player1: {
+        mark: settings.player1Mark,
+        color: settings.player1Color,
+      },
+      player2: {
+        mark: settings.player2Mark,
+        color: settings.player2Color,
+      },
+      records,
+    };
+    const gameResults = JSON.parse(localStorage.getItem("gameResults") || "[]");
+    localStorage.setItem(
+      "gameResults",
+      JSON.stringify([...gameResults, gameResult])
+    );
+  }, [
+    gameStatus,
+    records,
+    settings.boardSize,
+    settings.player1Color,
+    settings.player1Mark,
+    settings.player2Color,
+    settings.player2Mark,
+    settings.winCondition,
+  ]);
+
+  useEffect(() => {
+    if (gameStatus === "inProgress") return;
+    addGameResultLocalStorage();
+  }, [gameStatus, addGameResultLocalStorage]);
 
   return (
     <S.Container>
