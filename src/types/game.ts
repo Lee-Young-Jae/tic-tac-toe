@@ -36,3 +36,13 @@ export type Player = {
   color: string;
   undoCount: number;
 };
+
+export type GameResult = {
+  date: string;
+  status: gameStatus;
+  winCondition: number;
+  boardSize: number;
+  player1: Player;
+  player2: Player;
+  records: recordList;
+};

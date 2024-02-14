@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
-import { GameState, PlayerMark } from "../../types/game";
+import { GameResult, GameState, PlayerMark } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
 import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
@@ -157,7 +157,7 @@ const Play = () => {
   };
 
   const addGameResultLocalStorage = useCallback(() => {
-    const gameResult = {
+    const gameResult: GameResult = {
       date: new Date().toISOString(),
       status: gameStatus,
       winCondition: settings.winCondition,
@@ -165,10 +165,12 @@ const Play = () => {
       player1: {
         mark: settings.player1Mark,
         color: settings.player1Color,
+        undoCount: undoCount[settings.player1Mark],
       },
       player2: {
         mark: settings.player2Mark,
         color: settings.player2Color,
+        undoCount: undoCount[settings.player2Mark],
       },
       records,
     };
@@ -186,6 +188,7 @@ const Play = () => {
     settings.player2Color,
     settings.player2Mark,
     settings.winCondition,
+    undoCount,
   ]);
 
   useEffect(() => {
