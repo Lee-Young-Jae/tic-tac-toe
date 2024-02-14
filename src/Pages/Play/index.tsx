@@ -39,6 +39,28 @@ const Play = () => {
   );
 
   const { openModal, closeModal } = useModal();
+
+  const onGameRestart = () => {
+    setBoard(
+      Array.from({ length: settings.boardSize }, () =>
+        Array(settings.boardSize).fill(null)
+      )
+    );
+    setGameStatus("inProgress");
+    setRecords([]);
+    setUndoCount({
+      [settings.player1Mark]: 3,
+      [settings.player2Mark]: 3,
+    });
+    setTurn(
+      settings.startingPlayer === "random"
+        ? generateRandomPlayer()
+        : settings.startingPlayer === "player1"
+        ? settings.player1Mark
+        : settings.player2Mark
+    );
+  };
+
   const onClickCell = (x: number, y: number) => {
     if (gameStatus !== "inProgress") return;
     const newBoard = [...board];
@@ -52,20 +74,29 @@ const Play = () => {
 
     setRecords([...records, { postion: { x, y }, player: turn }]);
     if (checkWin(newBoard, turn, settings.winCondition)) {
-      setGameStatus(
-        turn === settings.player1Mark ? "player1Won" : "player2Won"
-      );
+      const winner = turn === settings.player1Mark ? "player1" : "player2";
+      setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
       openModal(
         <Modal
-          header={<p>{turn}님의 승리!</p>}
+          header={<p>🎉축하합니다!</p>}
           footer={
             <>
-              <button onClick={closeModal}>다시 시작하기</button>
-              <button>게임 결과 기록하기</button>
+              <S.ModalButton
+                onClick={() => {
+                  closeModal();
+                  onGameRestart();
+                }}
+              >
+                다시 시작하기
+              </S.ModalButton>
+              <S.ModalButton>게임 결과 기록하기</S.ModalButton>
             </>
           }
         >
-          <p>축하합니다!</p>
+          <p>
+            {`${winner}님의 승리! ${settings.winCondition}개의 ${turn}을
+            연결하셨습니다.`}
+          </p>
         </Modal>
       );
       setBoard(newBoard);
@@ -127,6 +158,9 @@ const Play = () => {
       </S.PlayerStatusSection>
       <Board board={board} onClick={onClickCell} />
       <S.MainButton onClick={onClickMain}>Main</S.MainButton>
+      {gameStatus !== "inProgress" && (
+        <S.RestartButton onClick={onGameRestart}>Restart</S.RestartButton>
+      )}
     </S.Container>
   );
 };
