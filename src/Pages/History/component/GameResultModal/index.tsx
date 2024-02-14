@@ -22,9 +22,9 @@ const GameResultModal = ({ gameResult, closeModal }: GameResultModalProps) => {
         </S.ModalButton>
       }
     >
-      <>
+      <S.ModalContainer>
         <GameResult gameResult={gameResult} />
-      </>
+      </S.ModalContainer>
     </Modal>
   );
 };

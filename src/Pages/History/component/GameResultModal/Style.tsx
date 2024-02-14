@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const ModalButton = styled.button`
   width: 100%;
   padding: 10px;
@@ -16,6 +23,7 @@ const ModalButton = styled.button`
 `;
 
 const S = {
+  ModalContainer,
   ModalButton,
 };
 
