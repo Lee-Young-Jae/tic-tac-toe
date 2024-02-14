@@ -5,6 +5,7 @@ import {
 } from "../../../../types/game";
 import Board from "../Board";
 import S from "./Style";
+import { formatDate } from "../../../../utills";
 
 interface GameResultProps {
   gameResult: GameResultType;
@@ -39,6 +40,18 @@ const GameResult = ({ gameResult }: GameResultProps) => {
 
   return (
     <>
+      <div>
+        <span style={{ color: player1.color }}>player1</span>
+        <span>
+          {" "}
+          {status === "player1Won"
+            ? "🖐️  👊"
+            : status === "player2Won"
+            ? "👊  🖐️"
+            : "🖐️  🖐️"}{" "}
+        </span>
+        <span style={{ color: player2.color }}>player2</span>
+      </div>
       <S.GameNavigater>
         <button onClick={() => handleStep(0)}>{`<<`}</button>
         <button onClick={() => handleStep(step - 1)}>이전</button>
@@ -49,10 +62,8 @@ const GameResult = ({ gameResult }: GameResultProps) => {
       </S.GameNavigater>
       <Board board={board} />
       <div>
-        <p>상태: {status}</p>
-        <p>날짜: {date}</p>
-        <p style={{ color: player1.color }}>player1: {player1.mark}</p>
-        <p style={{ color: player2.color }}>player2: {player2.mark}</p>
+        <p>승리조건: {gameResult.winCondition}줄 완성</p>
+        <p>{formatDate(date)}</p>
       </div>
     </>
   );

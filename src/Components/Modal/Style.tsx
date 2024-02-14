@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-flow: column;
   padding: 20px;
   position: relative;
-  width: 300px;
+  width: 350px;
   z-index: 101;
 `;
 
@@ -19,7 +19,7 @@ const Header = styled.div`
 
 const Main = styled.div`
   flex: 1 1;
-  max-height: 300px;
+  max-height: 400px;
   min-height: 40px;
   overflow-y: scroll;
 `;
