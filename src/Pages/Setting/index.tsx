@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
 import SettingPlayer from "./component/SettingPlayer";
 
@@ -10,30 +10,39 @@ const Setting = () => {
   const navigate = useNavigate();
   const { settings, updateSettings } = useContext(GameSettingsContext);
 
-  const onChangeBoardSize = (size: number) => {
-    if (settings.winCondition > size) {
-      updateSettings({ ...settings, winCondition: size, boardSize: size });
-      return;
-    }
-    updateSettings({
-      ...settings,
-      boardSize: size,
-    });
-  };
+  const onChangeBoardSize = useCallback(
+    (size: number) => {
+      if (settings.winCondition > size) {
+        updateSettings({ ...settings, winCondition: size, boardSize: size });
+        return;
+      }
+      updateSettings({
+        ...settings,
+        boardSize: size,
+      });
+    },
+    [settings, updateSettings]
+  );
 
-  const onChangeWinCondition = (e: React.MouseEvent<HTMLButtonElement>) => {
-    updateSettings({
-      ...settings,
-      winCondition: parseInt(e.currentTarget.value),
-    });
-  };
+  const onChangeWinCondition = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      updateSettings({
+        ...settings,
+        winCondition: parseInt(e.currentTarget.value),
+      });
+    },
+    [settings, updateSettings]
+  );
 
-  const onChangeStartingPlayer = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    updateSettings({
-      ...settings,
-      startingPlayer: e.target.value as "player1" | "player2" | "random",
-    });
-  };
+  const onChangeStartingPlayer = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      updateSettings({
+        ...settings,
+        startingPlayer: e.target.value as "player1" | "player2" | "random",
+      });
+    },
+    [settings, updateSettings]
+  );
 
   const onClickGameStart = () => {
     navigate("/play");
