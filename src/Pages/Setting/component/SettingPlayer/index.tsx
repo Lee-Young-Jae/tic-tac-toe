@@ -4,6 +4,7 @@ import { PlayerMark } from "../../../../types/game";
 import { PLAYER } from "../../../../utills/constance/gameSetting";
 
 import S from "./Style";
+import { useErrorModal } from "../../../../hooks/useModal";
 
 interface SettingPlayerProps {
   currentPlayer: "player1" | "player2";
@@ -11,12 +12,13 @@ interface SettingPlayerProps {
 
 const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
   const { settings, updateSettings } = useContext(GameSettingsContext);
+  const errorModal = useErrorModal();
 
   const onChangePlayerMark = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const otherPlayer = currentPlayer === "player1" ? "player2" : "player1";
 
     if (e.target.value === settings[`${otherPlayer}Mark`]) {
-      alert("다른 플레이어와 중복된 마크를 사용할 수 없습니다.");
+      errorModal("다른 플레이어와 같은 마크는 사용할 수 없어요...");
       return;
     }
 
@@ -36,7 +38,9 @@ const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
 
   const onChangePlayerColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isColorCloseToWhite(e.target.value)) {
-      alert("배경색과 너무 유사한 색상은 사용할 수 없습니다.");
+      errorModal(
+        "선택한 색상이 배경색과 너무 비슷해요... 다른 색상을 선택해주세요."
+      );
       return;
     }
 
@@ -44,7 +48,7 @@ const SettingPlayer = ({ currentPlayer }: SettingPlayerProps) => {
       e.target.value ===
       settings[`${currentPlayer === "player1" ? "player2" : "player1"}Color`]
     ) {
-      alert("다른 플레이어와 중복된 색상을 사용할 수 없습니다.");
+      errorModal("다른 플레이어와 동일한 색상은 사용할 수 없어요...");
       return;
     }
 
