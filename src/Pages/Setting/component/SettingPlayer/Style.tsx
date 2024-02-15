@@ -12,7 +12,7 @@ export const Container = styled.div`
 export const PlayerName = styled.h1`
   text-align: center;
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 1.2rem;
   font-weight: bold;
   text-transform: capitalize;
 `;
@@ -32,14 +32,12 @@ export const Select = styled.select`
   width: 100%;
   margin-top: 5px;
   margin-bottom: 10px;
-  font-size: 1.5rem;
   text-transform: capitalize;
   cursor: pointer;
 `;
 
 export const Option = styled.option`
   text-transform: capitalize;
-  font-size: 1rem;
 `;
 
 export const Input = styled.input`
