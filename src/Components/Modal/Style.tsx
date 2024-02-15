@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const SlideUp = keyframes`
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   background-color: #fff;
@@ -9,6 +18,8 @@ const Container = styled.div`
   position: relative;
   width: 350px;
   z-index: 101;
+
+  animation: ${SlideUp} 0.3s ease;
 `;
 
 const Header = styled.div`

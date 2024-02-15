@@ -19,7 +19,7 @@ const Modal = ({ children, header, footer }: ModalProps) => {
     buttons[0]?.focus();
   }, [footerRef]);
   return (
-    <S.Container>
+    <S.Container className="modal">
       {header && <S.Header>{header}</S.Header>}
       <S.Main>{children}</S.Main>
       {footer && <S.Footer ref={footerRef}>{footer}</S.Footer>}
