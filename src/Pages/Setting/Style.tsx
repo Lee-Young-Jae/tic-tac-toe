@@ -9,7 +9,6 @@ const Container = styled.div`
   height: 100dvh;
   border-radius: 5px;
   padding: 10px;
-
   box-shadow: 0 0 5px 0 #00000060;
 
   @media (max-width: 500px) {
@@ -23,7 +22,6 @@ const Label = styled.label`
   flex-direction: column;
   margin-bottom: 10px;
   text-transform: capitalize;
-  font-size: 1rem;
   font-weight: bold;
   text-align: center;
 `;
@@ -31,7 +29,7 @@ const Label = styled.label`
 const SettingBoardSize = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const BoardSizeButton = styled.button`
@@ -39,9 +37,8 @@ const BoardSizeButton = styled.button`
   border-radius: 5px;
   outline: none;
   cursor: pointer;
-  font-size: 1rem;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 7px;
+  margin-bottom: 5px;
 
   &:disabled {
     cursor: not-allowed;
@@ -87,7 +84,6 @@ const SettingPlayer = styled.div`
 
 const Players = styled.div`
   margin: 0 auto;
-
   width: 100%;
   display: flex;
   justify-content: space-between;
