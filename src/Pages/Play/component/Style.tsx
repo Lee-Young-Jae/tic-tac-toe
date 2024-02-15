@@ -23,6 +23,11 @@ const Cell = styled.div<{ $color?: string | null }>`
   &:hover {
     background-color: #f2f2f2;
   }
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const PlayerStatus = styled.div`
