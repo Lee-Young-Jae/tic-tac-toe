@@ -43,24 +43,17 @@ const Setting = () => {
     <S.Container>
       <S.SettingBoardSize>
         <S.Label>얼마나 큰 게임판을 생성할까요?</S.Label>
-        <S.BoardSizeButton
-          onClick={() => onChangeBoardSize(3)}
-          className={settings.boardSize === 3 ? "active" : ""}
-        >
-          3X3
-        </S.BoardSizeButton>
-        <S.BoardSizeButton
-          onClick={() => onChangeBoardSize(4)}
-          className={settings.boardSize === 4 ? "active" : ""}
-        >
-          4X4
-        </S.BoardSizeButton>
-        <S.BoardSizeButton
-          onClick={() => onChangeBoardSize(5)}
-          className={settings.boardSize === 5 ? "active" : ""}
-        >
-          5X5
-        </S.BoardSizeButton>
+        {Array(3)
+          .fill(0)
+          .map((_, index) => (
+            <S.BoardSizeButton
+              key={index}
+              onClick={() => onChangeBoardSize(index + 3)}
+              className={settings.boardSize === index + 3 ? "active" : ""}
+            >
+              {index + 3}X{index + 3}
+            </S.BoardSizeButton>
+          ))}
       </S.SettingBoardSize>
 
       <S.SettingWinCondition>
