@@ -48,8 +48,8 @@ const Container = styled.div<{ $isAnimating?: boolean }>`
     css`
       ${fadeOut} 0.3s ease;
 
-      & div {
-        animation: ${fadeOutAndSlideDown} 0.3s ease;
+      & .modal {
+        animation: ${fadeOutAndSlideDown} 0.4s ease;
       }
     `}
 `;

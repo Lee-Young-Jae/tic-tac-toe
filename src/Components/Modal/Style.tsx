@@ -1,12 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
-const fadeInAndSlideUp = keyframes`
+const SlideUp = keyframes`
   from {
-    opacity: 0;
     transform: translateY(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 `;
@@ -21,7 +19,7 @@ const Container = styled.div`
   width: 350px;
   z-index: 101;
 
-  animation: ${fadeInAndSlideUp} 0.3s ease;
+  animation: ${SlideUp} 0.3s ease;
 `;
 
 const Header = styled.div`
