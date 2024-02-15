@@ -3,9 +3,14 @@ import S from "./Style";
 interface BackdropProps {
   children: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  isAnimating?: boolean;
 }
-const Backdrop = ({ children, onClick }: BackdropProps) => {
-  return <S.Container onClick={onClick}>{children}</S.Container>;
+const Backdrop = ({ children, onClick, isAnimating }: BackdropProps) => {
+  return (
+    <S.Container $isAnimating={isAnimating} onClick={onClick}>
+      {children}
+    </S.Container>
+  );
 };
 
 export default Backdrop;

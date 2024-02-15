@@ -6,17 +6,23 @@ import { useContext, ReactNode } from "react";
 import { ModalContext } from "../context/ModalContext";
 
 export const useModal = () => {
-  const { modal, setModal } = useContext(ModalContext);
+  const { modal, setModal, isAnimating, setIsAnimating } =
+    useContext(ModalContext);
 
   const openModal = (modal: ReactNode) => {
     setModal(modal);
   };
 
   const closeModal = () => {
-    setModal(null);
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setModal(null);
+      setIsAnimating(false);
+    }, 300);
   };
 
-  return { openModal, closeModal, modal };
+  return { openModal, closeModal, modal, isAnimating };
 };
 
 export const useErrorModal = () => {
@@ -39,7 +45,7 @@ export const useErrorModal = () => {
 };
 
 export const ModalContainer = () => {
-  const { modal, closeModal } = useModal();
+  const { modal, closeModal, isAnimating } = useModal();
 
   const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target !== e.currentTarget) return;
@@ -48,7 +54,9 @@ export const ModalContainer = () => {
 
   return modal
     ? createPortal(
-        <Backdrop onClick={onBackdropClick}>{modal}</Backdrop>,
+        <Backdrop isAnimating={isAnimating} onClick={onBackdropClick}>
+          {modal}
+        </Backdrop>,
         document.getElementById("modal-root") as Element
       )
     : null;
