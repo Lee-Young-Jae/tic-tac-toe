@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect } from "react";
 import { GameSettingsContext } from "../../context/GameSettingsContext";
-import { GameResult, PlayerMark } from "../../types/game";
+import { GameResult, PlayerMark, GameStatus } from "../../types/game";
 import Board from "./component/Board";
 import S from "./Style";
 import { checkDraw, checkWin } from "../../utills/gameControl/gameControl";
@@ -87,7 +87,9 @@ const Play = () => {
 
     if (checkWin(newBoard, turn, settings.winCondition)) {
       const winner = turn === settings.player1Mark ? "player1" : "player2";
-      setGameStatus(winner === "player1" ? "player1Won" : "player2Won");
+      setGameStatus(
+        winner === "player1" ? GameStatus.Player1Won : GameStatus.Player2Won
+      );
       openGameResultModal(
         <p>🙌 축하합니다!</p>,
         <p>
@@ -99,7 +101,7 @@ const Play = () => {
     }
 
     if (checkDraw(newBoard)) {
-      setGameStatus("draw");
+      setGameStatus(GameStatus.Draw);
       openGameResultModal(
         <p>무승부!</p>,
         <p>치열한 승부였네요 우열을 가릴 수 없어요.</p>

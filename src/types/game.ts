@@ -20,7 +20,12 @@ type Cell = {
   sequence?: number;
 } | null;
 type Board = Cell[][];
-type GameStatus = "inProgress" | "player1Won" | "player2Won" | "draw";
+export enum GameStatus {
+  InProgress = "inProgress",
+  Player1Won = "player1Won",
+  Player2Won = "player2Won",
+  Draw = "draw",
+}
 type record = {
   position: { x: number; y: number };
   player: PlayerMark;
