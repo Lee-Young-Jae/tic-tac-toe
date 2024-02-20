@@ -19,7 +19,7 @@ const GameResult = ({ gameResult }: GameResultProps) => {
       () => Array.from({ length: gameResult.board.length }, () => null)
     );
     return gameResult.records.reduce((acc, record, index) => {
-      const { x, y } = record.postion;
+      const { x, y } = record.position;
       const currentPlayer = record.player;
       const currentColor =
         currentPlayer === player1.mark ? player1.color : player2.color;
@@ -44,7 +44,7 @@ const GameResult = ({ gameResult }: GameResultProps) => {
     setStep(step);
     setBoard(
       gameResult.records.slice(0, step).reduce((acc, record, index) => {
-        const { x, y } = record.postion;
+        const { x, y } = record.position;
         const currentPlayer = record.player;
         const currentColor =
           currentPlayer === player1.mark ? player1.color : player2.color;

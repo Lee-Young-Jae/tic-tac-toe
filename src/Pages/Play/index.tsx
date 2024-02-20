@@ -76,7 +76,7 @@ const Play = () => {
           ? settings.player1Color
           : settings.player2Color,
     };
-    setRecords([...records, { postion: { x, y }, player: turn }]);
+    setRecords([...records, { position: { x, y }, player: turn }]);
 
     setTurn(
       turn === settings.player1Mark
@@ -115,7 +115,7 @@ const Play = () => {
     const lastRecord = newRecords.pop();
     if (!lastRecord) return;
     const newBoard = [...board];
-    newBoard[lastRecord.postion.y][lastRecord.postion.x] = null;
+    newBoard[lastRecord.position.y][lastRecord.position.x] = null;
     setRecords(newRecords);
     setBoard(newBoard);
     const beforeTurn =
