@@ -22,17 +22,15 @@ type Cell = {
 type Board = Cell[][];
 type GameStatus = "inProgress" | "player1Won" | "player2Won" | "draw";
 type record = {
-  postion: { x: number; y: number };
+  position: { x: number; y: number };
   player: PlayerMark;
 };
 type recordList = record[];
-type gameStatus = "inProgress" | "player1Won" | "player2Won" | "draw";
 export type GameState = {
   board: Board;
   status: GameStatus;
   currentPlayer: PlayerMark;
   records: recordList;
-  gameStatus: gameStatus;
 };
 
 export type Player = {
@@ -43,7 +41,7 @@ export type Player = {
 
 export type GameResult = {
   date: string;
-  status: gameStatus;
+  status: GameStatus;
   winCondition: number;
   board: Board;
   player1: Player;
