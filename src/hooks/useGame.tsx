@@ -6,7 +6,7 @@ import { GameSettings, GameState } from "../types/game";
 export const useGame = (settings: GameSettings) => {
   const [board, setBoard] = useState<GameState["board"]>([]);
   const [gameStatus, setGameStatus] =
-    useState<GameState["gameStatus"]>("inProgress");
+    useState<GameState["status"]>("inProgress");
 
   const [records, setRecords] = useState<GameState["records"]>([]);
   const [undoCount, setUndoCount] = useState({
